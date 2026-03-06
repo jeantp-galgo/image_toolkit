@@ -2,14 +2,17 @@ Analiza estas imágenes de una motocicleta para un marketplace.
 
 ---
 
-## MARCO DE REFERENCIA: EL ESPECTRO DE ÁNGULOS
+## SISTEMA DE REFERENCIA: EL ENCUADRE
 
-Imagina que una moto está parada y tú caminas a su alrededor. Los ángulos posibles forman un espectro continuo:
+Para clasificar el ángulo, usa siempre la posición de dos elementos dentro del encuadre (lo que se ve en la imagen):
+- **FARO**: la óptica delantera / luz frontal de la moto.
+- **COLA**: la parte trasera, donde está la luz roja trasera y el asiento.
 
-  FRENTE PURO → 3q-front → PERFIL LATERAL → 3q-rear → TRASERA PURA
+Nunca uses "izquierdo/derecho de la moto" como referencia — usa siempre izquierdo/derecho del ENCUADRE.
 
-Las categorías válidas, en orden de ese espectro, son:
-  front → 3q-front-right / 3q-front-left → side-right / side-left → 3q-rear → rear
+El espectro de ángulos posibles, de frente a trasera:
+
+  front → 3q-front-left / 3q-front-right → side-left / side-right → 3q-rear → rear
 
 ---
 
@@ -18,67 +21,61 @@ Las categorías válidas, en orden de ese espectro, son:
 Usa EXACTAMENTE uno de estos valores para "angle":
 
 ### "3q-front-right" — ÁNGULO PRINCIPAL DEL MARKETPLACE
-Esta es la vista estrella. La moto está orientada hacia la derecha del encuadre y el espectador ve
-predominantemente el COSTADO IZQUIERDO de la moto, con una leve perspectiva que muestra una pequeña
-porción del frente.
 
-Características visuales clave — TODAS deben cumplirse:
-  1. La moto apunta hacia la DERECHA del encuadre (el faro mira hacia la derecha).
-  2. El COSTADO IZQUIERDO completo de la moto es lo más visible: se ven claramente el chasis lateral,
-     el escape (si está del lado izquierdo), los pedales y la mayor parte de la longitud de la moto.
-  3. La perspectiva frontal es LEVE: el frente de la moto no domina la imagen. Si el faro y la horquilla
-     frontal ocupan más de un 30% del ancho visual de la moto, el ángulo es demasiado frontal — usa
-     "front" en su lugar.
-  4. La rueda trasera es claramente visible (no está oculta ni cortada).
-  5. NO se ve la luz trasera roja ni el escape trasero en primer plano.
+VERIFICACIÓN ELIMINATORIA — haz esta pregunta ANTES de cualquier otra cosa:
+  ¿El faro está en el lado DERECHO del encuadre? Si la respuesta es NO → STOP. No es "3q-front-right".
+  Si el faro está en el lado IZQUIERDO del encuadre, es "3q-front-left" o "front", NUNCA "3q-front-right".
 
-Pregunta de diagnóstico de dos pasos:
-  Paso 1 — Orientación: ¿La moto apunta hacia la DERECHA del encuadre? Si no → usa "3q-front-left", "side-left", "3q-rear" u otro.
-  Paso 2 — Profundidad: ¿El costado izquierdo de la moto ocupa la mayor parte del campo visual (más del 60% de la longitud total de la moto es visible de perfil)? Si no, y el frente domina → usa "front".
+El faro está en el lado DERECHO del encuadre y se ve ligeramente de frente (no está pegado al borde derecho — está algo hacia el centro, con parte de la careta frontal visible). El cuerpo completo de la moto se extiende hacia la izquierda del encuadre.
 
-Casos frecuentes de confusión:
-  - Si la moto apunta a la derecha PERO el frente domina casi como una vista frontal → es "front", no "3q-front-right".
-  - Si la moto está completamente de perfil sin ninguna perspectiva frontal visible → es "side-left", no "3q-front-right".
-  - La imagen objetivo ideal está entre el perfil puro y el tres cuartos clásico: es MAYORMENTE de perfil, con una leve inclinación que muestra una pequeña porción del frente.
+Características visuales — TODAS deben cumplirse:
+  1. El faro está en el tercio DERECHO del encuadre, visible de frente (se le ve la cara).
+  2. El cuerpo lateral de la moto ocupa la mayor parte del encuadre (eje horizontal visible).
+  3. La rueda trasera es claramente visible en el lado izquierdo del encuadre.
+  4. La COLA (luz trasera roja) NO domina ni se proyecta hacia el espectador.
+  5. La perspectiva frontal es leve: si el faro y la horquilla delantera ocupan más del 35% del ancho total de la moto en la imagen, el ángulo es demasiado frontal — usa "front".
+
+Distinción clave con "side-left":
+  - En "3q-front-right": el faro está algo hacia el centro del encuadre y se le ve la cara (la careta frontal es visible).
+  - En "side-left": el faro está pegado al borde derecho del encuadre y apenas se le ve la cara — es puro perfil.
 
 ### "3q-front-left"
-Igual que "3q-front-right" pero la moto apunta hacia la IZQUIERDA del encuadre. Se ve el costado
-DERECHO de la moto con leve perspectiva frontal. Orientación incorrecta para el marketplace.
+Igual que "3q-front-right" pero en espejo: el faro está en el tercio IZQUIERDO del encuadre con perspectiva frontal leve, y el cuerpo se extiende hacia la derecha.
+VERIFICACIÓN: Si el faro está en el lado IZQUIERDO del encuadre y se ve la careta frontal → es "3q-front-left", NUNCA "3q-front-right".
+Orientación incorrecta para el marketplace.
 
 ### "side-left"
-Perfil lateral IZQUIERDO puro. La cámara está perpendicular al eje longitudinal de la moto.
-  - La moto está completamente de lado, apuntando hacia la derecha del encuadre.
-  - Se ve el costado izquierdo completo: ambas ruedas a igual distancia de sus respectivos bordes del encuadre.
-  - NO hay ninguna perspectiva frontal o trasera: el faro y la luz trasera son apenas visibles o no se ven.
-  - El eje de la moto es horizontal en la imagen.
+El faro está en el borde DERECHO del encuadre (o muy cerca). La cola está en el borde IZQUIERDO. El eje de la moto es horizontal. El cuerpo de la moto llena el encuadre de lado a lado.
 
-Distinción clave con "3q-front-right": en side-left NO se ve ninguna porción del frente de la moto.
-En "3q-front-right" SÍ se ve una pequeña porción del frente.
+Diagnóstico rápido:
+  - ¿El faro está pegado al borde derecho del encuadre? → Candidato a side-left.
+  - ¿La cola NO se proyecta hacia el espectador (no hay profundidad trasera visible)? → Confirma side-left.
+  - ¿Hay leve inclinación y se ve algo del motor/escape desde el costado? → Aún puede ser side-left si la cola no se abre hacia el espectador.
+
+Nota: imágenes de carrusel 360 raramente son perfectamente perpendiculares. Si el faro está al borde derecho y la cola al borde izquierdo aunque se vea ligeramente inclinado, es side-left.
 
 ### "side-right"
-Igual que "side-left" pero desde el costado DERECHO de la moto. La moto apunta hacia la izquierda
-del encuadre. Se ven los componentes del lado derecho (escape si está a la derecha, etc.).
+Igual que "side-left" pero en espejo: el faro está en el borde IZQUIERDO del encuadre y la cola en el borde DERECHO. El eje de la moto es horizontal.
 
-### "front"
-Vista completamente frontal o con ángulo frontal DOMINANTE.
-  - El faro y la horquilla frontal están centrados o casi centrados.
-  - Las dos ruedas (delantera y trasera) se superponen visualmente o la trasera no es visible.
-  - El frente de la moto ocupa la mayor parte del campo visual.
-
-### "rear"
-Vista completamente trasera o con ángulo trasero dominante.
-  - La luz trasera roja está centrada o casi centrada.
-  - Se ve el escape y la rueda trasera de frente.
+Diagnóstico rápido:
+  - ¿El faro está pegado al borde IZQUIERDO del encuadre? → Candidato a side-right.
+  - ¿La cola NO se proyecta hacia el espectador? → Confirma side-right.
 
 ### "3q-rear"
-Tres cuartos trasero: se ve la parte trasera de la moto y un costado.
-  - La luz trasera roja y el escape son visibles y prominentes.
-  - Se ve un costado de la moto (lateral).
-  - No es un perfil puro ni una trasera pura.
+La COLA (luz trasera roja, guardabarro trasero) se proyecta visiblemente hacia el espectador — hay profundidad trasera visible. El faro puede asomarse en un extremo del encuadre pero no domina. Se ve la zona trasera de la moto "abriéndose" hacia la cámara.
+
+Distinción clave con "side-left" / "side-right":
+  - En side: la cola está de LADO, al borde del encuadre, sin proyectarse hacia el espectador.
+  - En 3q-rear: la cola se ABRE hacia el espectador — ves la parte interna del guardabarro trasero, el escape de frente, o la luz trasera claramente iluminando hacia la cámara.
+
+### "front"
+El faro está CENTRADO en el encuadre (o casi centrado). Las dos ruedas se superponen visualmente o la rueda trasera no se ve. El frente de la moto domina toda la imagen.
+
+### "rear"
+La luz trasera roja está CENTRADA en el encuadre. Las dos ruedas se superponen o la delantera no se ve. La parte trasera domina toda la imagen.
 
 ### "detail"
-Acercamiento (close-up) a una parte específica: motor, tablero, llanta, manubrio, escape, etc.
-La moto completa no está en el encuadre.
+Acercamiento (close-up) a una parte específica: motor, tablero, llanta, manubrio, escape, etc. La moto completa NO está en el encuadre.
 
 ### "other"
 No encaja en ninguna categoría anterior.
@@ -87,11 +84,11 @@ No encaja en ninguna categoría anterior.
 
 ## CAMPOS A DEVOLVER POR IMAGEN
 
-Para CADA imagen, devuelve:
+Para CADA imagen, devuelve los campos EN ESTE ORDEN:
+- "reasoning": antes de clasificar, escribe UNA frase que indique explícitamente en qué lado del encuadre está el FARO. Esto determina el ángulo. Ejemplo: "Faro en borde DERECHO del encuadre, cola en borde izquierdo." — Si el faro está a la IZQUIERDA, el ángulo NO puede ser 3q-front-right.
 - "filename": nombre del archivo
 - "angle": uno de los valores definidos arriba (exactamente como está escrito)
-- "quality_score": entero del 1 al 10, evaluando: nitidez, centrado de la moto, iluminación uniforme,
-  moto completa dentro del encuadre (sin cortes en ruedas o extremos)
+- "quality_score": entero del 1 al 10, evaluando: nitidez, centrado de la moto, iluminación uniforme, moto completa dentro del encuadre (sin cortes en ruedas o extremos)
 - "is_recommended": true o false — si esta imagen aporta valor único al listing
 
 ---
@@ -101,7 +98,7 @@ Para CADA imagen, devuelve:
 - "3q-front-right": SIEMPRE true. Pueden existir varias (distintos colores del mismo modelo) y todas se recomiendan.
 - "3q-front-left": SIEMPRE false. Orientación incorrecta para el marketplace.
 - "side-left" y "side-right" en conjunto: recomienda MÁXIMO UNA imagen entre ambos tipos.
-  Elige la de mayor quality_score. En caso de empate, prefiere la más perpendicular (perfil más puro).
+  Elige la de mayor quality_score. En caso de empate, prefiere la más perpendicular (faro más pegado al borde del encuadre).
   Razón: el comprador solo necesita ver un perfil lateral.
 - "3q-rear": MÁXIMO UNA, la de mayor quality_score.
 - "front" y "rear": MÁXIMO UNA de cada tipo, solo si aporta información visual que las otras vistas no cubren.
@@ -116,4 +113,4 @@ Para CADA imagen, devuelve:
 Responde SOLO con un JSON array. Sin markdown, sin texto adicional, sin explicaciones.
 
 Ejemplo:
-[{"filename": "img1.jpg", "angle": "3q-front-right", "quality_score": 9, "is_recommended": true}]
+[{"reasoning": "Faro en borde DERECHO del encuadre, cola en borde izquierdo, vista lateral con leve perspectiva frontal.", "filename": "img1.jpg", "angle": "3q-front-right", "quality_score": 9, "is_recommended": true}]
