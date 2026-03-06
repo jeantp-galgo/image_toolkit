@@ -1,15 +1,17 @@
 """
 Pipeline de procesamiento de imágenes para marketplace de motos.
-Requiere: pip install anthropic Pillow python-dotenv numpy
+Requiere: pip install anthropic google-genai Pillow python-dotenv numpy
 
 Flujo:
 1. Lee imágenes de una carpeta local
-2. Claude Vision clasifica ángulos y selecciona las mejores
+2. Vision AI (Gemini o Claude) clasifica ángulos y selecciona las mejores
 3. Pillow centra y redimensiona sobre fondo blanco
 4. Guarda con nombres estandarizados
 
 Uso:
     python app.py /ruta/a/carpeta/imagenes --output /ruta/salida --size 1000
+    python app.py /ruta/a/carpeta/imagenes --provider gemini
+    python app.py /ruta/a/carpeta/imagenes --provider anthropic --model claude-sonnet-4-6
 """
 import sys
 from pathlib import Path
@@ -63,7 +65,8 @@ def run_pipeline(
     input_folder: str,
     output_folder: str | None = None,
     target_size: int = 1000,
-    model: str = "claude-sonnet-4-6",
+    provider: str = "gemini",
+    model: str | None = None,
     dry_run: bool = False,
 ):
     """
@@ -73,7 +76,8 @@ def run_pipeline(
         input_folder: carpeta con imágenes de UNA moto
         output_folder: carpeta de salida (default: input_folder/output)
         target_size: tamaño del canvas cuadrado
-        model: modelo de Claude a usar
+        provider: proveedor de IA ("gemini" o "anthropic")
+        model: modelo a usar; si es None usa el default del provider
         dry_run: si True, solo clasifica y muestra resultados sin procesar
     """
     input_path = Path(input_folder)
@@ -92,9 +96,9 @@ def run_pipeline(
 
     print(f"Encontradas {len(images)} imágenes en {input_folder}")
 
-    # 2. Clasificar y seleccionar con Claude Vision
-    print("Clasificando con Claude Vision...")
-    classifications = classify_and_select(images, model=model)
+    # 2. Clasificar y seleccionar con Vision AI
+    print(f"Clasificando con Vision AI ({provider})...")
+    classifications = classify_and_select(images, provider=provider, model=model)
 
     # Mostrar resultados
     print("\n--- Clasificación ---")
@@ -109,7 +113,7 @@ def run_pipeline(
     # 3. Procesar solo las recomendadas
     recommended = [c for c in classifications if c["is_recommended"]]
     if not recommended:
-        print("[WARN] Claude no recomendó ninguna imagen. Revisa las originales.")
+        print("[WARN] Vision AI no recomendó ninguna imagen. Revisa las originales.")
         return classifications
 
     # Separar principales (3q-front-right) del resto de galería
@@ -168,7 +172,17 @@ if __name__ == "__main__":
     parser.add_argument("input", help="Carpeta con imágenes de una moto")
     parser.add_argument("--output", "-o", help="Carpeta de salida (default: input/output)")
     parser.add_argument("--size", "-s", type=int, default=1000, help="Tamaño del canvas cuadrado (default: 1000)")
-    parser.add_argument("--model", "-m", default="claude-sonnet-4-6", help="Modelo de Claude")
+    parser.add_argument(
+        "--provider", "-p",
+        choices=["gemini", "anthropic"],
+        default="gemini",
+        help="Proveedor de IA a usar (default: gemini)",
+    )
+    parser.add_argument(
+        "--model", "-m",
+        default=None,
+        help="Modelo a usar (default: gemini-2.5-flash para gemini, claude-sonnet-4-6 para anthropic)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Solo clasificar, no procesar")
     args = parser.parse_args()
 
@@ -176,6 +190,7 @@ if __name__ == "__main__":
         input_folder=args.input,
         output_folder=args.output,
         target_size=args.size,
+        provider=args.provider,
         model=args.model,
         dry_run=args.dry_run,
     )
