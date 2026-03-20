@@ -150,8 +150,8 @@ def nombre_archivo(row: pd.Series, indice: int, columna_id: str | None) -> str:
     """Genera el nombre del archivo de salida a partir del ID o del índice."""
     if columna_id and columna_id in row.index and pd.notna(row[columna_id]):
         nombre = str(row[columna_id]).strip().replace(" ", "_").replace("/", "-")
-        return f"{nombre}.jpg"
-    return f"moto_{indice:04d}.jpg"
+        return f"{nombre}-feed.jpg"
+    return f"moto_{indice:04d}-feed.jpg"
 
 
 # ---------------------------------------------------------------------------
