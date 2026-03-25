@@ -17,9 +17,9 @@ de una plantilla local fija.
 # PARAMETROS CONFIGURABLES
 # ---------------------------------------------------------------------------
 
-RUTA_CSV       = r"C:\Users\JTRUJILLO\Documents\Galgo\Scripts\Data\historical_data\src\data\lifestyle_base\BaseMX.csv"       # CSV con columna imagen_link
-RUTA_PLANTILLA = r"C:\Users\JTRUJILLO\Documents\Galgo\Scripts\Otros\image_handling\MARCO-ANUNCIO-DINAMICO-2.png"       # Imagen plantilla local (.png)
-CARPETA_OUTPUT = r"C:\Users\JTRUJILLO\Documents\Galgo\Scripts\Otros\image_handling\src\data\imagenes_con_marcos"                # Carpeta donde se guardan los resultados
+RUTA_CSV       = r"C:\Users\JTRUJILLO\Desktop\utiles\Reportes\historical_data\src\data\lifestyle_base\BaseCO.csv"       # CSV con columna imagen_link
+RUTA_PLANTILLA = "./MARCO-ANUNCIO-DINAMICO-MARZO.jpg"       # Imagen plantilla local (.png)
+CARPETA_OUTPUT = "./src/data/imagenes_con_marcos"                # Carpeta donde se guardan los resultados
 
 COLUMNA_URL    = "image_link"   # Nombre de la columna con la URL
 COLUMNA_ID     = "code"            # Columna para nombrar el archivo de salida (None = usar índice)
@@ -174,8 +174,10 @@ def main():
 
     carpeta_output.mkdir(parents=True, exist_ok=True)
 
+
+     # Filtrar acá qué se le pondrá marco
     df = pd.read_csv(ruta_csv)
-    df = df[df["brand"] == "Italika"]
+    # df = df[df]
 
     if COLUMNA_URL not in df.columns:
         print(f"[ERROR] El CSV no tiene la columna '{COLUMNA_URL}'.")
